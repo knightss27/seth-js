@@ -3,6 +3,7 @@
 	import Navbar from './components/Navbar.svelte'
 	import Table from './components/Table.svelte'
 	import Header from './components/Header.svelte'
+	import TextInput from "./components/TextInput.svelte";
 </script>
 
 <Navbar>
@@ -68,6 +69,17 @@
 				<td>Mexico</td>
 				<td style="padding-right: 0px"><Button color="red" icon="delete" size="1.25rem"></Button></td>
 			</tr>
+	</Table>
+
+	<br>
+
+	<Table title="Inputs">
+		<tr>
+			<th>Text</th>
+		</tr>
+		<tr>
+			<td><TextInput placeholder="Hello World..."></TextInput></td>
+		</tr>
 	</Table>
 </main>
 
