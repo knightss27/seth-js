@@ -8,7 +8,7 @@
     <div>
         <h2>{title}</h2>
         <span>
-            <Button icon="add" inverted=true size="1rem">Add Record</Button>
+            <slot name="header-button"></slot>
         </span>
     </div>
 

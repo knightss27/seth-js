@@ -67,7 +67,7 @@
     }
 
     .material-icons {
-        background-color: transparent !important;
+        /* background-color: transparent !important; */
     }
 
     button:hover {
