@@ -1,3 +1,23 @@
+<script>
+    export let isOpen = false;
+
+
+</script>
+
+<main>
+    <div class="dropdown">
+        <button class="dropbtn" on:click={() => {isOpen = !isOpen}} class:dropbtn-active={isOpen} >Dropdown</button>
+        {#if isOpen}
+            <div class="dropdown-content">
+    <!--            TODO: Global classes for these -->
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        {/if}
+    </div>
+</main>
+
 <style>
     .dropbtn {
         color: white;
@@ -35,25 +55,13 @@
         background-color: #f1f1f1;
     }
 
-    .dropdown:hover .dropdown-content {
+    .dropdown-content {
         display: block;
     }
 
-    .dropdown:hover .dropbtn {
+    .dropbtn-active {
         background-color: #474747;
         border-radius: 15px 15px 0 0;
 
     }
 </style>
-
-<main>
-    <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
-        <div class="dropdown-content">
-<!--            TODO: Global classes for these -->
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-        </div>
-    </div>
-</main>
