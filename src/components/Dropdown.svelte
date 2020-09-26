@@ -24,6 +24,7 @@
         -moz-appearance: none;
         appearance: none;
         cursor: pointer;
+        width: 50%;
     }
 
     @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -33,7 +34,7 @@
     }
 
     label {
-        position: relative
+        position: relative;
     }
 
     label:after {
