@@ -28,6 +28,7 @@
         margin: 2px;
         padding: 10px;
         background: transparent;
+        transition: ease border-radius 0.1s;
     }
 
     .dropdown {
@@ -36,12 +37,12 @@
     }
 
     .dropdown-content {
-        display: none;
         position: absolute;
         background-color: #f9f9f9;
         min-width: 160px;
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         z-index: 1;
+        display: block;
     }
 
     .dropdown-content a {
@@ -55,13 +56,12 @@
         background-color: #f1f1f1;
     }
 
-    .dropdown-content {
-        display: block;
-    }
-
     .dropbtn-active {
         background-color: #474747;
         border-radius: 15px 15px 0 0;
+    }
 
+    .dropbtn:active {
+        transform: scale(95%, 95%);
     }
 </style>

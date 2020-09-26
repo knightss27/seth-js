@@ -16,6 +16,7 @@
         display: flex;
         max-height: 100%;
         align-items: center;
+        cursor: pointer;
     }
     .sticky {
         position: fixed;
