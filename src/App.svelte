@@ -45,6 +45,7 @@
 	<br>
 
 	<Table>
+		<span slot="header-button"><Button icon="add" inverted=true size="1rem">Add Record</Button></span>
 			<tr>
 				<th>Company</th>
 				<th>Contact</th>
