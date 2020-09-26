@@ -74,7 +74,8 @@
 <style>
 	main {
 		height: 100%;
-		width: 100%;
+		width: 75%;
 		padding-bottom: 600px;
+		margin: auto;
 	}
 </style>
