@@ -4,6 +4,7 @@
 	import Table from './components/Table.svelte'
 	import Header from './components/Header.svelte'
 	import TextInput from "./components/TextInput.svelte";
+	import Dropdown from "./components/Dropdown.svelte";
 </script>
 
 <Navbar>
@@ -77,9 +78,18 @@
 	<Table title="Inputs">
 		<tr>
 			<th>Text</th>
+			<th>Dropdown</th>
 		</tr>
 		<tr>
 			<td><TextInput placeholder="Hello World..."></TextInput></td>
+			<td>
+				<Dropdown>
+					<option value="volvo">Volvo</option>
+					<option value="saab">Saab</option>
+					<option value="mercedes">Mercedes</option>
+					<option value="audi">Audi</option>
+				</Dropdown>
+			</td>
 		</tr>
 	</Table>
 </main>
