@@ -38,6 +38,12 @@
         opacity: 0.6;
         transition: 0.3s;
         font-size: var(--fontSize);
+        margin: 0px;
+        padding: 0px 5px 0px 5px;
+    }
+
+    button:active {
+        transform: scale(93%, 93%);
     }
 
     button > span {
@@ -47,6 +53,10 @@
     }
 
     button div {
+        margin: 10px;
+    }
+
+    button div:active {
         margin: 10px;
     }
 
