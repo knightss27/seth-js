@@ -46,6 +46,10 @@
         transform: scale(93%, 93%);
     }
 
+    .disabled:active {
+        transform: none;
+    }
+
     button > span {
         color: inherit;
         padding-left: 5px;
