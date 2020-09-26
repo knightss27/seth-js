@@ -15,7 +15,7 @@
         border: 1px solid white;
         border-radius: 15px;
         margin: 2px;
-        padding: 5px;
+        padding: 10px;
         background: transparent;
         color: white;
         outline: none;
