@@ -6,19 +6,6 @@
 
 </script>
 
-<Navbar>
-    <div slot="left-side" on:click={() => {isNate.set(true)}}>
-        Nate
-    </div>
-    <div slot="right-side" on:click={() => {isNate.set(false)}}>
-        Seth
-    </div>
-</Navbar>
-
-{#if $isNate}
-<Nate />
-{:else}
 <Seth />
-{/if}
 
 

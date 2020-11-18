@@ -9,6 +9,7 @@
     import { addSnackbar } from './utils'
     import FlexSelect from './components/FlexCheckbox.svelte';
     import RadioButton from './components/RadioButton.svelte';
+    import Navbar from './components/Navbar.svelte';
 
     let options = ['1', '2', '3']
 
@@ -20,8 +21,15 @@
     $: console.log(selected)
 </script>
 
+<Navbar>
+    <h1 slot="brand">Seth.js</h1>
+    <div class="buttons">
+        <Button>Nav 1</Button>
+        <Button>Nav 2</Button>
+    </div>
+</Navbar>
+
 <main>
-    <h1>hi</h1>
     <Button >Button</Button>
     <Button filled={true}>Button</Button>
     <Button color="red">Button</Button>
@@ -73,12 +81,23 @@
 
 
 <style>
+
     h1 {
-        color: black;
+        margin: 0px 6px 4px;
+        padding: 0px;
+        flex-grow: 1;
     }
+
     main {
         width: 100%;
     }
+
+    div.buttons {
+        display: flex;
+        justify-self: flex-end;
+        margin-right: 5px;
+    }
+    
     div.select-card {
         display: flex;
         color: black;

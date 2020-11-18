@@ -2,12 +2,13 @@
     export let filled: boolean = false;
     export let color: string = "black";
     export let icon: string = "";
+    export let style: string = "";
     export let disabled: boolean = false;
 
     $: isSlotFilled = $$slots["default"];
 </script>
 
-<button class:filled style="--buttonColor:{color}" disabled={disabled} class:disabled on:click>
+<button class:filled style="--buttonColor:{color};{style}" disabled={disabled} class:disabled on:click>
     {#if icon != ""}
     <span class="material-icons button-icon" class:icon-only={!isSlotFilled}>
         {icon}
