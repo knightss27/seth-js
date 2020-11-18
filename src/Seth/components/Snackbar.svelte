@@ -37,45 +37,57 @@
     transition:fly="{{delay: 50, duration: 400, y:100, easing: sineInOut }}" style="--mainColor:{color};"
     class:grouped={grouped} class:ungrouped={!grouped}
     >
-    <p>{status}</p>
-    <p>{message}</p>
-    <span class="material-icons" on:click={handleClose}>
-        close
-    </span>
+    <div class="wrapper">
+        <div class="status">{status}</div>
+        <div class="message">{message.toLowerCase()}</div>
+        <span class="material-icons" on:click={handleClose} style="--mainColor:{color};">
+            close
+        </span>
+    </div>
 </main>
 
 {/if}
 
 <style>
-    main.ungrouped {
-        color: white;
-        background: var(--mainColor);
+    main {
+        background: white;
+        border: 2px solid var(--mainColor);
+        margin: 1px 0px;
+    }
+    main.ungrouped div.wrapper {
         position: fixed;
         bottom: 10px;
         left: 50%;
         transform: translatex(-50%);
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
     }
-    main.grouped {
+    main div.wrapper {
         color: white;
         background: var(--mainColor);
-        border-radius: 5px;
+        opacity: 0.8;
         display: flex;
         align-items: center;
         overflow: hidden;
-        margin: 2px;
     }
-    p {
-        margin: 10px;
+    div.message, div.status {
+        display: flex;
+        align-items: center;
+        margin: 4px;
+        padding: 0px;
+        padding-bottom: 2px;
+    }
+    div.status {
+        background: rgba(0, 0, 0, 0.4) !important;
+        padding: 1px 4px 2px 4px;
+        border-radius: 2px;
+        margin-left: 7px;
     }
     span {
-        font-size: 18px;
-        margin: 10px;
-        background: rgba(255, 255, 255, 0.5);
+        font-size: 16px;
+        margin: 6px 7px 6px 5px;
+        background: rgba(255, 255, 255, 0.3);
         color: white;
-        border-radius: 25px;
+        /* border-radius: 25px; */
+        /* border: 2px solid var(--mainColor); */
         padding: 2px;
         display: flex;
         align-items: center;
@@ -84,9 +96,6 @@
     span:hover {
         background: rgba(255, 255, 255, 0.4);
         cursor: pointer;
-    }
-    :global(.snackbar) {
-        color: white;
     }
 </style>
 

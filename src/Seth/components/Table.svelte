@@ -114,7 +114,7 @@
         left: var(--left);
         background: black;
         z-index: -1;
-        transition: cubic-bezier(.19,1,.22,1) top 0.4s, cubic-bezier(.19,1,.22,1) left 0.4s, cubic-bezier(.19,1,.22,1) width 0.4s, ease background 0.7s, cubic-bezier(.19,1,.22,1) height 0.4s;
+        transition: ease top 0.4s, ease left 0.4s, ease width 0.4s, ease background 0.7s, ease height 0.4s;
     }
 
     .selector-main-grey {
@@ -125,7 +125,7 @@
         left: var(--mainOffset);
         background: rgba(0, 0, 0, 0.1);
         z-index: -1;
-        transition: cubic-bezier(.19,1,.22,1) top 0.4s, cubic-bezier(.19,1,.22,1) left 0.4s, cubic-bezier(.19,1,.22,1) width 0.4s, cubic-bezier(.19,1,.22,1) height 0.4s, ease background 0.7s;
+        transition: ease top 0.4s, ease left 0.4s, ease width 0.4s, ease height 0.4s, ease background 0.7s;
     }
 
     .selector {
@@ -137,7 +137,7 @@
         z-index: -2;
         margin: 0px;
         background-color: rgba(0, 0, 0, 0.1);
-        transition: cubic-bezier(.19,1,.22,1) width .4s, cubic-bezier(.19,1,.22,1) left .4s;
+        transition: ease width .4s, ease left .4s;
     }
 
     .selectorVisible {

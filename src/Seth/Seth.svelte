@@ -5,16 +5,19 @@
     import Button from './components/Button.svelte'
     import ButtonGroup from './components/ButtonGroup.svelte';
     import Table from './components/Table.svelte';
+    import Stepper from './components/Stepper.svelte';
+    import { addSnackbar } from './utils'
+    import FlexSelect from './components/FlexCheckbox.svelte';
+    import RadioButton from './components/RadioButton.svelte';
+
+    let options = ['1', '2', '3']
 
     let test :boolean = false;
     let test2 :boolean = false;
 
-    function addSnackbar(status, message, color, timeout) {
-        const id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
-        let done = false;
-        $SnackBars[id] = {status, message, color, timeout, done}
-    }
+    let selected = '1';
 
+    $: console.log(selected)
 </script>
 
 <main>
@@ -28,7 +31,7 @@
     <Button disabled={true}>Button</Button>
     <Button filled={true} disabled={true}>Button</Button>
     
-    <ButtonGroup width="400px">
+    <ButtonGroup width="500px">
         <div>
             Button 1
         </div>
@@ -38,11 +41,34 @@
         <div>
             Button 3
         </div>
+        <div>
+            Button 3
+        </div>
     </ButtonGroup>
     <Table></Table>
-    <Button color="green" on:click={() => {addSnackbar("200", "Success", "green", 1000)}}>Add snackbar</Button>
+    <Button color="green" on:click={() => {addSnackbar("200", "Created new snackbar!", "green", 50000)}}>Add snackbar</Button>
     <SnackbarGroup />
-    <Snackbar message="test" color="green" open={test}></Snackbar>    
+    <Stepper ></Stepper>
+    <br>
+    <div class="main-container">
+        {#each options as option}
+        <RadioButton bind:group={selected} id={option}>
+            <div class="select-card" class:selected={selected == option}>
+                <div class="select-card-header">
+                    option {option}
+                </div>
+                <div class="select-card-body">
+                    <span><b>CPU</b> : 4x 2.2 GHz</span>
+                    <span><b>RAM</b> : 8GB</span>
+                    <span><b>SSD</b> : 2TB</span>
+                </div>
+            </div>
+        </RadioButton>
+        {/each}
+        current selected option: {selected}
+    </div>
+    
+    <!-- <FlexSelect nodes={[{name: 'test'}, {name: 'tst'}]}/> -->
 </main>
 
 
@@ -52,6 +78,85 @@
     }
     main {
         width: 100%;
+    }
+    div.select-card {
+        display: flex;
+        color: black;
+        width: 100px;
+        height: 100px;
+        box-shadow: 2px 2px lightgrey;
+        border: 2px solid grey;
+        flex-direction: column;
+        align-items: center;
+        margin: 5px;
+        cursor: pointer;
+    }
+
+    div.select-card-header {
+        margin-top: 5px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid grey;
+        width: 100%;
+        text-align: center;
+    }
+
+    div.selected {
+        border: 2px solid black;
+        box-shadow: none;
+        transform: translate(2px, 2px);
+        margin: 5px;
+    }
+
+    div.select-card-body {
+        display: flex;
+        flex-direction: column;
+        margin-top: 5px;
+    }
+
+    div.select-card-body span {
+        font-size: 0.7rem;
+    }
+
+    /* div.select-card {
+        display: flex;
+        color: black;
+        width: 100px;
+        height: 100px;
+        border-radius: 15px !important;
+        box-shadow: 3px 3px 2px lightgrey;
+        flex-direction: column;
+        align-items: center;
+        margin: 6px;
+        cursor: pointer;
+    }
+
+    div.select-card-header {
+        margin-top: 5px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid grey;
+        width: 100%;
+        text-align: center;
+    }
+
+    div.selected {
+        border: 1px solid black;
+        margin: 5px;
+    }
+
+    div.select-card-body {
+        display: flex;
+        flex-direction: column;
+        margin-top: 5px;
+    }
+
+    div.select-card-body span {
+        font-size: 0.7rem;
+    } */
+
+    div.main-container {
+        display: flex;
+        flex-wrap: wrap;
+        color: black;
     }
 </style>
 
