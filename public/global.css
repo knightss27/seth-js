@@ -1,10 +1,9 @@
 html, body {
-	position: relative;
 	width: 100%;
-	height: 100%;
 }
 
 body {
+	position: absolute;
 	color: #ffffff;
 	margin: 0;
 	padding: 0px;

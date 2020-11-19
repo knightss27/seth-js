@@ -21,7 +21,7 @@
     function handleMousemove(e) {
         let rect = e.target.getBoundingClientRect();
         let main = e.target.offsetParent.getBoundingClientRect();
-        selectorPositionY = rect.top - 5; //TODO: Fix this, its subtracting from navbar margin??
+        selectorPositionY = rect.top; //TODO: Fix this, its subtracting from navbar margin?? - FIXED FOR NOW
         selectorPosition = rect.left;
         selectorWidth = rect.right - rect.left;
         selectorHeight = rect.bottom - rect.top;

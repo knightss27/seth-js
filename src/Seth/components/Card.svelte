@@ -22,7 +22,7 @@
     {/if}
 
     {#if $$slots['body']}
-        <div class="card-body" bind:clientHeight={bodyHeight} style={$$slots['img'] ? 'border-top: 1px solid grey;' : null}>
+        <div class="card-body" bind:clientHeight={bodyHeight} style={$$slots['img'] ? 'border-top: 2px solid black;' : null}>
             <slot name="body"></slot>
         </div>
     {/if}
@@ -46,7 +46,7 @@
 
     div.card-header {
         display: flex;
-        border-bottom: 1px solid grey;
+        border-bottom: 2px solid black;
         align-items: center;
         font-weight: bold;
         font-size: 1.5rem;

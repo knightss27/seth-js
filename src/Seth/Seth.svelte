@@ -83,8 +83,8 @@ import Card from './components/Card.svelte';
         <div class="body" slot="body">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur fugiat dolorum quos, error velit sint enim. Quam, tempore veritatis reiciendis explicabo atque necessitatibus rem, aliquid alias, inventore incidunt qui fuga.
         </div>
-        <!-- svelte-ignore a11y-missing-attribute -->
-        <img slot="img" width="100%" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbigdogsbirdblog.files.wordpress.com%2F2010%2F03%2Fmale_ruby_throated_hummingbird.jpg&f=1&nofb=1">
+
+        <img slot="img" width="100%" alt="card media" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbigdogsbirdblog.files.wordpress.com%2F2010%2F03%2Fmale_ruby_throated_hummingbird.jpg&f=1&nofb=1">
     </Card>
     <!-- <FlexSelect nodes={[{name: 'test'}, {name: 'tst'}]}/> -->
 </main>
