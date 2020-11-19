@@ -33,6 +33,7 @@
         selectorVisible = false;
     }
 
+    //TODO - find out how to stop it from completely covering bounding box when on table margin.
 </script>
 
 <main>
@@ -67,7 +68,6 @@
     main {
         width: 60%;
         position: relative;
-        border: 2px solid black;
         margin: 5px;
         /* color: black; */
     }
@@ -77,6 +77,7 @@
         border-collapse: collapse;
         overflow: hidden;
         position: relative;
+        border: 2px solid black;
     }
 
     th, td {
