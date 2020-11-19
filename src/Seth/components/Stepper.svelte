@@ -1,24 +1,26 @@
-<script>
+<script lang="ts">
     import Button from './Button.svelte'
     import { tweened } from 'svelte/motion'
     import { cubicOut } from 'svelte/easing';
 
-    //customization exports
-    export let color = "black";
-    export let width = "95%";
-    export let simple = "true";
+    /** button and outline color */
+    export let color: string = "black";
+    /** component width */
+    export let width: string = "95%";
+    /** should show checkmarks? */
+    export let simple: boolean = true;
 
     //logic exports
-    export let steps = 4;
-    export let nextStep = null;
-    export let prevStep = null;
-    export let currentStep = 0;
-    export let finished = false;
-    export let started = false;
+    export let steps: number = 4;
+    export let nextStep: () => void = null;
+    export let prevStep: () => void = null;
+    export let currentStep: number = 0;
+    export let finished: boolean = false;
+    export let started: boolean = false;
 
 
     //derived
-    let capped = true;
+    export let capped: boolean = true;
 
     $: if (capped) {width = "95%"}
     $: steps > 0 ? started = true : null
@@ -49,11 +51,12 @@
 
 <main 
     style="
+    --color:{color};
     --containerWidth:{width}; 
     flex-direction:{capped && !simple ? 'column' : 'row'}; 
     align-items:{capped && !simple ? 'flex-start' : 'center'}"
     >
-    <Button on:click={prevStep != null ? prevStep : prev}>Previous</Button>
+    <Button on:click={prevStep != null ? prevStep : prev} color={color}>Previous</Button>
     {#if !capped}
     <div class="container">
         <div class="stepper-bar" style="--stepperWidth:{$tweenedStepWidth}%;--color:{color};"></div>
@@ -82,7 +85,7 @@
     {/if}
 
 
-    <Button on:click={nextStep != null ? nextStep : next}>
+    <Button on:click={nextStep != null ? nextStep : next} color={color}>
         <!-- {currentStep >= steps - 1 ? "finish" : "next"} -->
         next
     </Button>
@@ -93,7 +96,7 @@
 <style>
     main {
         display: inline-flex;
-        border: 2px solid black;
+        border: 2px solid var(--color);
         align-items: center;
         width: var(--containerWidth);
         margin: 4px;
@@ -115,7 +118,7 @@
     .stepper-bar {
         height: 4px;
         width: var(--stepperWidth);
-        background-color: black;
+        background-color: var(--color);
         position: absolute;
         top: 50%;
         left: 0%;
@@ -125,7 +128,7 @@
     .stepper-bar-bg {
         height: 4px;
         width: 100%;
-        background: black;
+        background: var(--color);
         opacity: .2;
         position: absolute;
         top: 50%;
@@ -136,7 +139,7 @@
     .capped-stepper-bar {
         height: 4px;
         width: 0%;
-        background-color: black;
+        background-color: var(--color);
         margin-left: 10px;
         transition: ease width 0.3s;
         position: absolute;
@@ -148,7 +151,7 @@
     .capped-stepper-bar-bg {
         height: 4px;
         width: calc(100% - 20px);
-        background-color: black;
+        background-color: var(--color);
         opacity: 0.2;
         margin-left: 10px;
         transition: ease width 0.3s;
@@ -161,7 +164,7 @@
     .stepper-cap {
         width: 10px;
         height: 10px;
-        background: black;
+        background: var(--color);
         opacity: 0.2;
         border-radius: 25px;
         position: absolute;
@@ -174,7 +177,7 @@
         font-size: 1rem !important;
         width: 10px;
         height: 10px;
-        color: black;
+        color: var(--color);
         opacity: 1;
         border-radius: 25px;
         position: absolute;

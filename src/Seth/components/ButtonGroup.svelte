@@ -2,6 +2,31 @@
     export let width:string = "100%"
 </script>
 
+<!-- 
+    @component
+    **Button Component:**
+
+    ```tsx
+        <ButtonGroup width="px|%|etc." >
+            <div>Button 1</div>
+            <div>Button 2</div>
+            <div>Button 3</div>
+        </ButtonGroup>
+    ```
+
+    **Options TO BE IMPLEMENTED:**
+    - All options have defaults, so all are optional.
+        - *color* (string: "black"): can be any hex code or color name.
+        - *icon* (string): the name of a material icon
+        - *filled* (boolean: false) whether the button should be the filled variant.
+        - *disabled* (boolean: false) disables the button
+        - *style* (string): styling applied to main button element.
+
+    - Button text can be put between the button tags.
+        - This is optional. To create an icon-only button, self close the button.
+
+-->
+
 <main>
     <wrapper style="--groupWidth:{width}" class="sethjs-ButtonGroup">
         <slot></slot>

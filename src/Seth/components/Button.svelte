@@ -13,35 +13,28 @@
     @component
     **Button Component:**
 
-    - A simple button component, with a few options.
-    - All options have defaults, so all are essentially optional.
-        - color (string): can be any hex code or color name.
-            - Default: "black"
-        - icon (string): the name of a material icon
-            - Optional
-        - filled (boolean): whether the button should be the filled variant.
-            - Default: false
-        - disabled (boolean): disables the button
-            - Default: false
-        - style (string): styling applied to main button element.
-            - Optional
+    ```tsx
+        <Button
+            color="color-name|hex"
+            icon="material-icon-name"
+            filled={true|false}
+            disabled={true|false}
+            style="name: value;"
+        >
+            Optional Button Text
+        </Button>
+    ```
+
+    **Options:**
+    - All options have defaults, so all are optional.
+        - *color* (string: "black"): can be any hex code or color name.
+        - *icon* (string): the name of a material icon
+        - *filled* (boolean: false) whether the button should be the filled variant.
+        - *disabled* (boolean: false) disables the button
+        - *style* (string): styling applied to main button element.
 
     - Button text can be put between the button tags.
         - This is optional. To create an icon-only button, self close the button.
-
-    - Usage:
-
-    ```tsx
-    <Button
-        color="color-name|hex"
-        icon="material-icon-name"
-        filled={true|false}
-        disabled={true|false}
-        style="name: value;"
-    >
-        Optional Button Text
-    </Button>
-    ```
 
 -->
 

@@ -10,7 +10,7 @@
     import FlexSelect from './components/FlexCheckbox.svelte';
     import RadioButton from './components/RadioButton.svelte';
     import Navbar from './components/Navbar.svelte';
-import Card from './components/Card.svelte';
+    import Card from './components/Card.svelte';
 
     let options = ['1', '2', '3']
 
@@ -57,11 +57,11 @@ import Card from './components/Card.svelte';
     <Table></Table>
     <Button color="green" on:click={() => {addSnackbar("200", "Created new snackbar!", "green", 50000)}}>Add snackbar</Button>
     <SnackbarGroup />
-    <Stepper ></Stepper>
+    <Stepper color="black"></Stepper>
     <br>
     <div class="main-container">
         {#each options as option}
-        <RadioButton bind:group={selected} id={option}>
+        <RadioButton bind:group={selected} id={option} on:click={() => console.log('clicked')}>
             <div class="select-card" class:selected={selected == option}>
                 <div class="select-card-header">
                     option {option}
