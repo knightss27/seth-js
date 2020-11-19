@@ -1,4 +1,5 @@
 <script lang="ts">
+
     export let filled: boolean = false;
     export let color: string = "black";
     export let icon: string = "";
@@ -7,6 +8,42 @@
 
     $: isSlotFilled = $$slots["default"];
 </script>
+
+<!-- 
+    @component
+    **Button Component:**
+
+    - A simple button component, with a few options.
+    - All options have defaults, so all are essentially optional.
+        - color (string): can be any hex code or color name.
+            - Default: "black"
+        - icon (string): the name of a material icon
+            - Optional
+        - filled (boolean): whether the button should be the filled variant.
+            - Default: false
+        - disabled (boolean): disables the button
+            - Default: false
+        - style (string): styling applied to main button element.
+            - Optional
+
+    - Button text can be put between the button tags.
+        - This is optional. To create an icon-only button, self close the button.
+
+    - Usage:
+
+    ```tsx
+    <Button
+        color="color-name|hex"
+        icon="material-icon-name"
+        filled={true|false}
+        disabled={true|false}
+        style="name: value;"
+    >
+        Optional Button Text
+    </Button>
+    ```
+
+-->
 
 <button class:filled style="--buttonColor:{color};{style}" disabled={disabled} class:disabled on:click>
     {#if icon != ""}

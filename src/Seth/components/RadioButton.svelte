@@ -1,12 +1,10 @@
 <script>
-import { onMount } from "svelte";
-
     export let id = '';
     export let group = '';
 
 </script>
 
-<label class="container" >
+<label class="container" on:click>
     <input type="radio" value={id} bind:group={group}>
     <slot></slot>
 </label>

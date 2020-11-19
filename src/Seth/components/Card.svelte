@@ -8,7 +8,7 @@
 
 </script>
 
-<main style="margin:{margin}px; --elevation:{elevation}px; --width:{width}; --height:{height}; --display:{height != '' ? 'block' : 'flex'};">
+<main on:click style="margin:{margin}px; --elevation:{elevation}px; --width:{width}; --height:{height}; --display:{height != '' ? 'block' : 'flex'};">
     {#if $$slots['header']}
         <div class="card-header">
             <slot name="header"></slot>
