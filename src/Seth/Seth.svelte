@@ -19,7 +19,6 @@
 
     let selected = '1';
 
-    $: console.log(selected)
 </script>
 
 <Navbar>
@@ -31,14 +30,52 @@
 </Navbar>
 
 <main>
-    <Button >Button</Button>
-    <Button filled={true}>Button</Button>
-    <Button color="red">Button</Button>
-    <Button color="red" filled={true}>Button</Button>
-    <Button icon="edit">Button</Button>
-    <Button icon="edit"></Button>
-    <Button disabled={true}>Button</Button>
-    <Button filled={true} disabled={true}>Button</Button>
+    <Card width="calc(100% - 14px)" height="auto">
+        <div slot="header">Buttons</div>
+        <div slot="body" style="width: 100%; display: flex; flex-wrap: wrap;">
+            <Card width="200px" height="90px">
+                <div class="button-section">
+                    <h3>Basis</h3>
+                    <div style="display: flex;">
+                        <Button >Button</Button>
+                        <Button filled={true}>Button</Button>
+                    </div>
+                </div>
+            </Card>
+
+            <Card width="200px" height="90px">
+                <div class="button-section">
+                    <h3>Colored</h3>
+                    <div style="display: flex">
+                        <Button color="red">Button</Button>
+                        <Button color="red" filled={true}>Button</Button>
+                    </div>
+                </div>
+            </Card>
+
+            <Card width="200px" height="90px">
+                <div class="button-section">
+                    <h3>Icon</h3>
+                    <div style="display: flex">
+                        <Button icon="edit">Button</Button>
+                        <Button icon="edit"></Button>
+                    </div>
+                </div>
+            </Card>
+
+            <Card width="200px" height="90px">
+                <div class="button-section">
+                    <h3>Disabled</h3>
+                    <div style="display: flex">
+                        <Button disabled={true}>Disabled</Button>
+                        <Button filled={true} disabled={true}>Disabled</Button>
+                    </div>
+                </div>
+            </Card>
+        </div>
+    </Card>
+
+    
     
     <ButtonGroup width="500px">
         <div>
@@ -57,7 +94,10 @@
     <Table></Table>
     <Button color="green" on:click={() => {addSnackbar("200", "Created new snackbar!", "green", 50000)}}>Add snackbar</Button>
     <SnackbarGroup />
-    <Stepper color="black"></Stepper>
+    <div style={'width: 90%;'}>
+        <Stepper color="black" steps={3}></Stepper>
+    </div>
+    
     <br>
     <div class="main-container">
         {#each options as option}
@@ -84,7 +124,7 @@
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur fugiat dolorum quos, error velit sint enim. Quam, tempore veritatis reiciendis explicabo atque necessitatibus rem, aliquid alias, inventore incidunt qui fuga.
         </div>
 
-        <img slot="img" width="100%" alt="card media" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbigdogsbirdblog.files.wordpress.com%2F2010%2F03%2Fmale_ruby_throated_hummingbird.jpg&f=1&nofb=1">
+        <img slot="img" width="100%" alt="card media" src="Hummingbird.jpg">
     </Card>
     <!-- <FlexSelect nodes={[{name: 'test'}, {name: 'tst'}]}/> -->
 </main>
@@ -106,8 +146,12 @@
         width: 100%;
     }
 
-    div.body {
-        /* width: 200px; */
+    div.button-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        justify-content: center;
     }
 
     div.buttons {

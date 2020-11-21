@@ -6,7 +6,7 @@
     /** button and outline color */
     export let color: string = "black";
     /** component width */
-    export let width: string = "95%";
+    export let width: string = "100%";
     /** should show checkmarks? */
     export let simple: boolean = true;
 
@@ -22,12 +22,10 @@
     //derived
     export let capped: boolean = true;
 
-    $: if (capped) {width = "95%"}
     $: steps > 0 ? started = true : null
 
     const next = () => {
         if (currentStep < steps) {
-            console.log('forward')
             currentStep += 1;
         } else {
             finished = true;
@@ -47,12 +45,14 @@
 
     $: $tweenedStepWidth = currentStep/steps * 100;
 
+    let margin = 4;
+
 </script>
 
 <main 
     style="
     --color:{color};
-    --containerWidth:{width}; 
+    --containerWidth:calc({width} - {3 * margin}px); 
     flex-direction:{capped && !simple ? 'column' : 'row'}; 
     align-items:{capped && !simple ? 'flex-start' : 'center'}"
     >
