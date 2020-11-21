@@ -1,5 +1,6 @@
 <script lang="ts">
     export let width:string = "100%"
+    export let clientWidth:number;
 </script>
 
 <!-- 
@@ -27,8 +28,8 @@
 
 -->
 
-<main>
-    <wrapper style="--groupWidth:{width}" class="sethjs-ButtonGroup">
+<main style="--groupWidth:{width}" bind:clientWidth={clientWidth}>
+    <wrapper style="width: 100%" class="sethjs-ButtonGroup">
         <slot></slot>
     </wrapper>
 </main>
@@ -37,6 +38,7 @@
     main {
         display: inline-block;
         margin: 5px;
+        width: var(--groupWidth);
     }
 
     :global(.sethjs-ButtonGroup div) {

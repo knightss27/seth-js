@@ -30,69 +30,72 @@
 </Navbar>
 
 <main>
-    <Card width="calc(100% - 14px)" height="auto">
-        <div slot="header">Buttons</div>
-        <div slot="body" style="width: 100%; display: flex; flex-wrap: wrap;">
-            <Card width="200px" height="90px">
-                <div class="button-section">
-                    <h3>Basis</h3>
-                    <div style="display: flex;">
-                        <Button >Button</Button>
-                        <Button filled={true}>Button</Button>
-                    </div>
+    <div class="button-wrapper">
+        <Card width="min(500px, calc(100% - 14px))" height="auto">
+            <div slot="header">Buttons</div>
+            <div slot="body" style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-left: -5px;">
+                <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content: center;">
+                    <Card width="min(200px, 90%)" height="90px" style={"flex-grow: 1"}>
+                        <div class="button-section">
+                            <h3>Basis</h3>
+                            <div style="display: flex;">
+                                <Button >Button</Button>
+                                <Button filled={true}>Button</Button>
+                            </div>
+                        </div>
+                    </Card>
+        
+                    <Card width="200px" height="90px" style={"flex-grow: 1"}>
+                        <div class="button-section">
+                            <h3>Colored</h3>
+                            <div style="display: flex">
+                                <Button color="red">Button</Button>
+                                <Button color="red" filled={true}>Button</Button>
+                            </div>
+                        </div>
+                    </Card>
+        
+                    <Card width="200px" height="90px" style={"flex-grow: 1"}>
+                        <div class="button-section">
+                            <h3>Icon</h3>
+                            <div style="display: flex">
+                                <Button icon="edit">Button</Button>
+                                <Button icon="edit"></Button>
+                            </div>
+                        </div>
+                    </Card>
+        
+                    <Card width="200px" height="90px" style={"flex-grow: 1"}>
+                        <div class="button-section">
+                            <h3>Disabled</h3>
+                            <div style="display: flex">
+                                <Button disabled={true}>Disabled</Button>
+                                <Button filled={true} disabled={true}>Disabled</Button>
+                            </div>
+                        </div>
+                    </Card>
                 </div>
-            </Card>
-
-            <Card width="200px" height="90px">
-                <div class="button-section">
-                    <h3>Colored</h3>
-                    <div style="display: flex">
-                        <Button color="red">Button</Button>
-                        <Button color="red" filled={true}>Button</Button>
+                
+                <h3 style="margin-top: 10px">Button Group</h3>
+                <ButtonGroup width="calc(100% - 10px)">
+                    <div>
+                        Button 1
                     </div>
-                </div>
-            </Card>
-
-            <Card width="200px" height="90px">
-                <div class="button-section">
-                    <h3>Icon</h3>
-                    <div style="display: flex">
-                        <Button icon="edit">Button</Button>
-                        <Button icon="edit"></Button>
+                    <div>
+                        Button 2
                     </div>
-                </div>
-            </Card>
-
-            <Card width="200px" height="90px">
-                <div class="button-section">
-                    <h3>Disabled</h3>
-                    <div style="display: flex">
-                        <Button disabled={true}>Disabled</Button>
-                        <Button filled={true} disabled={true}>Disabled</Button>
+                    <!-- <div>
+                        Button 3
                     </div>
-                </div>
-            </Card>
-        </div>
-    </Card>
+                    <div>
+                        Button 3
+                    </div> -->
+                </ButtonGroup>
+            </div>
+        </Card>     
+    </div>
 
-    
-    
-    <ButtonGroup width="500px">
-        <div>
-            Button 1
-        </div>
-        <div>
-            Button 2
-        </div>
-        <div>
-            Button 3
-        </div>
-        <div>
-            Button 3
-        </div>
-    </ButtonGroup>
-    <Table></Table>
-    <Button color="green" on:click={() => {addSnackbar("200", "Created new snackbar!", "green", 50000)}}>Add snackbar</Button>
+    <!-- <Button color="green" on:click={() => {addSnackbar("200", "Created new snackbar!", "green", 50000)}}>Add snackbar</Button>
     <SnackbarGroup />
     <div style={'width: 90%;'}>
         <Stepper color="black" steps={3}></Stepper>
@@ -125,7 +128,7 @@
         </div>
 
         <img slot="img" width="100%" alt="card media" src="Hummingbird.jpg">
-    </Card>
+    </Card> -->
     <!-- <FlexSelect nodes={[{name: 'test'}, {name: 'tst'}]}/> -->
 </main>
 
@@ -144,6 +147,14 @@
 
     main {
         width: 100%;
+    }
+
+    div.button-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 500px;
+        margin-top: 20px;
     }
 
     div.button-section {

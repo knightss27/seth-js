@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+    export let width: string = '100%';
+
     let tableWidth = 0;
     let selectorWidth = 0;
     let selectorHeight = 0;
@@ -36,7 +38,7 @@
     //TODO - find out how to stop it from completely covering bounding box when on table margin.
 </script>
 
-<main>
+<main style="width:calc({width} - 15px)">
     <table on:mousemove={handleMousemove} bind:clientWidth={tableWidth} on:mouseout={handleMouseout} on:mouseover={(e) => {selectorVisible = true;}}>
         <thead>
             <tr>
@@ -66,10 +68,10 @@
 
 <style>
     main {
-        width: 60%;
         position: relative;
         margin: 5px;
         /* color: black; */
+        border: 2px solid black;
     }
 
     table {
@@ -77,7 +79,7 @@
         border-collapse: collapse;
         overflow: hidden;
         position: relative;
-        border: 2px solid black;
+
     }
 
     th, td {

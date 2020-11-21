@@ -3,12 +3,13 @@
     export let elevation: number = 2;
     export let width: string = '400px';
     export let height: string = '400px';
+    export let style: string = '';
 
     let bodyHeight = null;
 
 </script>
 
-<main on:click style="margin:{margin}px; --elevation:{elevation}px; --width:{width}; --height:{height}; --display:{height != '' ? 'block' : 'flex'};">
+<main on:click style="margin:{margin}px; --elevation:{elevation}px; --width:{width}; --height:{height}; --display:{height != '' ? 'block' : 'flex'};{style}">
     {#if $$slots['header']}
         <div class="card-header">
             <slot name="header"></slot>
