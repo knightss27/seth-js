@@ -31,7 +31,7 @@
 
 <main>
     <div class="button-wrapper">
-        <Card width="min(500px, calc(100% - 14px))" height="auto">
+        <Card width="min(500px, calc(100% - 14px))" height="auto" elevation={0}>
             <div slot="header">Buttons</div>
             <div slot="body" style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-left: -5px;">
                 <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content: center;">
