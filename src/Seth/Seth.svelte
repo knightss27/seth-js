@@ -11,6 +11,13 @@
     import RadioButton from './components/RadioButton.svelte';
     import Navbar from './components/Navbar.svelte';
     import Card from './components/Card.svelte';
+    import {location} from 'svelte-spa-router'
+    import ButtonPage from './Pages/ButtonPage.svelte';
+    import Hero from './Pages/Hero.svelte';
+    import {fade} from 'svelte/transition'
+    
+
+    const pages = ['/', '/buttons', '/snackbars', '/table']
 
     let options = ['1', '2', '3']
 
@@ -19,10 +26,21 @@
 
     let selected = '1';
 
+    let next = null;
+    let last = null;
+
+    $: if ($location) {
+        console.log($location);
+        const current = pages.indexOf($location)
+        next = '#' + pages[Math.min(current + 1, pages.length - 1)]
+        last = '#' + pages[Math.max(0, current - 1)]
+    }
+
 </script>
 
 <Navbar>
-    <h1 slot="brand">Seth.js</h1>
+    <h1 slot="brand">seth.js</h1>
+    <!-- <h3>{$location}</h3> -->
     <div class="buttons">
         <Button>Nav 1</Button>
         <Button>Nav 2</Button>
@@ -30,69 +48,15 @@
 </Navbar>
 
 <main>
-    <div class="button-wrapper">
-        <Card width="min(500px, calc(100% - 14px))" height="auto" elevation={0}>
-            <div slot="header">Buttons</div>
-            <div slot="body" style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-left: -5px;">
-                <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content: center;">
-                    <Card width="min(200px, 90%)" height="90px" style={"flex-grow: 1"}>
-                        <div class="button-section">
-                            <h3>Basis</h3>
-                            <div style="display: flex;">
-                                <Button >Button</Button>
-                                <Button filled={true}>Button</Button>
-                            </div>
-                        </div>
-                    </Card>
-        
-                    <Card width="200px" height="90px" style={"flex-grow: 1"}>
-                        <div class="button-section">
-                            <h3>Colored</h3>
-                            <div style="display: flex">
-                                <Button color="red">Button</Button>
-                                <Button color="red" filled={true}>Button</Button>
-                            </div>
-                        </div>
-                    </Card>
-        
-                    <Card width="200px" height="90px" style={"flex-grow: 1"}>
-                        <div class="button-section">
-                            <h3>Icon</h3>
-                            <div style="display: flex">
-                                <Button icon="edit">Button</Button>
-                                <Button icon="edit"></Button>
-                            </div>
-                        </div>
-                    </Card>
-        
-                    <Card width="200px" height="90px" style={"flex-grow: 1"}>
-                        <div class="button-section">
-                            <h3>Disabled</h3>
-                            <div style="display: flex">
-                                <Button disabled={true}>Disabled</Button>
-                                <Button filled={true} disabled={true}>Disabled</Button>
-                            </div>
-                        </div>
-                    </Card>
-                </div>
-                
-                <h3 style="margin-top: 10px">Button Group</h3>
-                <ButtonGroup width="calc(100% - 10px)">
-                    <div>
-                        Button 1
-                    </div>
-                    <div>
-                        Button 2
-                    </div>
-                    <!-- <div>
-                        Button 3
-                    </div>
-                    <div>
-                        Button 3
-                    </div> -->
-                </ButtonGroup>
-            </div>
-        </Card>     
+    {#if $location == pages[1]}
+        <ButtonPage />
+    {:else if $location == pages[0]}
+        <Hero />
+    {/if}
+
+    <div class="switch-buttons">
+        <Button icon="chevron_left" href={last}>back</Button>
+        <Button icon="chevron_right" flipped={true} href={next}>next</Button>
     </div>
 
     <!-- <Button color="green" on:click={() => {addSnackbar("200", "Created new snackbar!", "green", 50000)}}>Add snackbar</Button>
@@ -147,21 +111,11 @@
 
     main {
         width: 100%;
+        display: grid;
     }
 
-    div.button-wrapper {
+    div.switch-buttons {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 500px;
-        margin-top: 20px;
-    }
-
-    div.button-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100%;
         justify-content: center;
     }
 

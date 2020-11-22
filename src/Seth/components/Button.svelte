@@ -5,6 +5,10 @@
     export let icon: string = "";
     export let style: string = "";
     export let disabled: boolean = false;
+    export let flipped: boolean = false;
+    export let width: string = "";
+    export let height: string = "";
+    export let href: string = null;
 
     $: isSlotFilled = $$slots["default"];
 </script>
@@ -37,21 +41,45 @@
         - This is optional. To create an icon-only button, self close the button.
 
 -->
-
-<button class:filled style="--buttonColor:{color};{style}" disabled={disabled} class:disabled on:click>
-    {#if icon != ""}
-    <span class="material-icons button-icon" class:icon-only={!isSlotFilled}>
-        {icon}
-    </span>
-    {/if}
-    {#if isSlotFilled}
-    <div class:icon={icon != ""}>
-        <slot></slot>
-    </div>
-    {/if}
-</button>
+{#if href !== null}
+    <a href={href}>
+        <button class:filled class:flipped style="--buttonColor:{color};width:{width};height:{height};{style}" disabled={disabled} class:disabled on:click>
+            {#if icon != ""}
+            <span class="material-icons button-icon" class:flipped class:icon-only={!isSlotFilled}>
+                {icon}
+            </span>
+            {/if}
+            {#if isSlotFilled}
+            <div class:icon={icon != ""} class:flipped>
+                <slot></slot>
+            </div>
+            {/if}
+        </button>
+    </a>
+{:else}
+    <button class:filled class:flipped style="--buttonColor:{color};width:{width};height:{height};{style}" disabled={disabled} class:disabled on:click>
+        {#if icon != ""}
+        <span class="material-icons button-icon" class:flipped class:icon-only={!isSlotFilled}>
+            {icon}
+        </span>
+        {/if}
+        {#if isSlotFilled}
+        <div class:icon={icon != ""} class:flipped>
+            <slot></slot>
+        </div>
+        {/if}
+    </button>
+{/if}
 
 <style>
+    button.flipped {
+        flex-direction: row-reverse;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
     button {
         padding: 0px;
         margin: 5px;
@@ -90,10 +118,19 @@
         margin: 5px 15px 5px 10px !important;
     }
 
+    .icon.flipped {
+        margin: 5px 10px 5px 15px !important;
+    }
+
     .button-icon {
         padding-left: 10px;
         margin: 0px;
         font-size: 1.2em;
+    }
+
+    .button-icon.flipped {
+        padding-left: 0px;
+        padding-right: 10px;
     }
 
     .icon-only {
