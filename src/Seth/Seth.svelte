@@ -15,6 +15,7 @@
     import ButtonPage from './Pages/ButtonPage.svelte';
     import Hero from './Pages/Hero.svelte';
     import {fade} from 'svelte/transition'
+import SnackbarPage from './Pages/SnackbarPage.svelte';
     
 
     const pages = ['/', '/buttons', '/snackbars', '/table']
@@ -48,10 +49,12 @@
 </Navbar>
 
 <main>
-    {#if $location == pages[1]}
+    {#if $location == pages[0]}
+        <Hero />    
+    {:else if $location == pages[1]}
         <ButtonPage />
-    {:else if $location == pages[0]}
-        <Hero />
+    {:else if $location == pages[2]}
+        <SnackbarPage />
     {/if}
 
     <div class="switch-buttons">

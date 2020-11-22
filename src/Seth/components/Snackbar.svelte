@@ -1,11 +1,12 @@
-<script>
-    export let open = false;
-    export let status = "200";
-    export let message = "";
-    export let color = "green";
-    export let handleClose = () => {console.log('You need a function here!')};
-    export let timeout = 4000;
-    export let grouped = false;
+<script lang="ts">
+    export let open: boolean = false;
+    export let status: string = "200";
+    export let message: string = "";
+    export let color: string = "green";
+    export let handleClose: () => any = null;
+    export let timeout: number = 4000;
+    export let grouped: boolean = false;
+    export let style: string = "";
 
     import {fly} from 'svelte/transition'
     import { sineInOut } from 'svelte/easing'
@@ -17,9 +18,11 @@
             handleClose = () => {open = false;}
         }
 
-        let autoClose = setTimeout(handleClose, timeout);
-
-        return () => {clearTimeout(autoClose);}
+        if (timeout !== null) {
+            let autoClose = setTimeout(handleClose, timeout);
+            return () => {clearTimeout(autoClose);}
+        }
+        
     })
 
     // example usage:
@@ -37,7 +40,7 @@
     transition:fly="{{delay: 50, duration: 400, y:100, easing: sineInOut }}" style="--mainColor:{color};"
     class:grouped={grouped} class:ungrouped={!grouped}
     >
-    <div class="wrapper">
+    <div class="wrapper" style={style}>
         <div class="status">{status}</div>
         <div class="message">{message.toLowerCase()}</div>
         <span class="material-icons" on:click={handleClose} style="--mainColor:{color};">
@@ -67,6 +70,7 @@
         display: flex;
         align-items: center;
         overflow: hidden;
+        justify-content: space-between;
     }
     div.message, div.status {
         display: flex;
