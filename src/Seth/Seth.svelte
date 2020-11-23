@@ -15,7 +15,7 @@
     import ButtonPage from './Pages/ButtonPage.svelte';
     import Hero from './Pages/Hero.svelte';
     import {fade} from 'svelte/transition'
-import SnackbarPage from './Pages/SnackbarPage.svelte';
+    import SnackbarPage from './Pages/SnackbarPage.svelte';
     
 
     const pages = ['/', '/buttons', '/snackbars', '/table']
@@ -37,6 +37,8 @@ import SnackbarPage from './Pages/SnackbarPage.svelte';
         last = '#' + pages[Math.max(0, current - 1)]
     }
 
+    let button = null;
+
 </script>
 
 <Navbar>
@@ -52,14 +54,14 @@ import SnackbarPage from './Pages/SnackbarPage.svelte';
     {#if $location == pages[0]}
         <Hero />    
     {:else if $location == pages[1]}
-        <ButtonPage />
+        <ButtonPage button={button} />
     {:else if $location == pages[2]}
-        <SnackbarPage />
+        <SnackbarPage button={button}/>
     {/if}
 
     <div class="switch-buttons">
-        <Button icon="chevron_left" href={last}>back</Button>
-        <Button icon="chevron_right" flipped={true} href={next}>next</Button>
+        <Button icon="chevron_left" href={last} on:click={() => button = 'back'}>back</Button>
+        <Button icon="chevron_right" flipped={true} href={next} on:click={() => button = 'next'}>next</Button>
     </div>
 
     <!-- <Button color="green" on:click={() => {addSnackbar("200", "Created new snackbar!", "green", 50000)}}>Add snackbar</Button>

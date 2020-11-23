@@ -1,12 +1,20 @@
-<script>
+<script lang="ts">
     import Card from '../components/Card.svelte';
     import Button from '../components/Button.svelte';
     import ButtonGroup from '../components/ButtonGroup.svelte';
     import { fly } from 'svelte/transition'
     import { quintOut } from 'svelte/easing';
+    import { onMount } from 'svelte';
+    export let button: string;
+    let onscreen = false;
+
+    onMount(() => {
+        onscreen = true;
+    })
+
 </script>
 
-<div class="button-wrapper" out:fly="{{delay: 0, x: 500, duration: 300, easing: quintOut }}" in:fly="{{delay: 200, x: 500, duration: 300, easing: quintOut }}">
+<div class="button-wrapper" out:fly="{{delay: 0, x: (button == 'next') && (onscreen) ? -500 : 500, duration: 300, easing: quintOut }}" in:fly="{{delay: 200, x: (button == 'back') && (!onscreen) ? -500 : 500, duration: 300, easing: quintOut }}">
     <Card width="min(500px, calc(100% - 14px))" height="auto" elevation={0}>
         <div slot="header">Buttons</div>
         <div slot="body" style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-left: -5px;">

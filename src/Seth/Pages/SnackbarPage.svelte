@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Snackbar from '../components/Snackbar.svelte';
     import SnackbarGroup from '../components/SnackbarGroup.svelte'
     import { SnackBars } from '../../stores'
@@ -7,11 +7,18 @@
     import { addSnackbar } from '../utils'
     import { fly } from 'svelte/transition'
     import { quintOut } from 'svelte/easing';
+    import { onMount } from 'svelte';
+    export let button: string;
+    let onscreen = false;
+
+    onMount(() => {
+        onscreen = true;
+    })
 
     let open = true;
 </script>
 
-<div class="snackbar-wrapper" out:fly="{{delay: 0, x: 500, duration: 300, easing: quintOut }}" in:fly="{{delay: 200, x: 500, duration: 300, easing: quintOut }}">
+<div class="snackbar-wrapper" out:fly="{{delay: 0, x: (button == 'next') && (onscreen) ? -500 : 500, duration: 300, easing: quintOut }}" in:fly="{{delay: 200, x: (button == 'back') && (!onscreen) ? -500 : 500, duration: 300, easing: quintOut }}">
     <Card width="min(500px, calc(100% - 14px))" height="auto" elevation={0}>
         <div slot="header">Snackbars</div>
         <div slot="body" class="snackbar-card-body">
