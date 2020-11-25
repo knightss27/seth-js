@@ -52,7 +52,7 @@
 </Navbar>
 
 <main>
-    <!-- <TextInput/> -->
+    <!-- <TextInput icon="account_circle"/> -->
     <div class="gallery-wrapper">
     {#if $location == pages[0]}
         <Hero />    
