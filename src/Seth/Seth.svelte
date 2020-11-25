@@ -16,6 +16,7 @@
     import Hero from './Pages/Hero.svelte';
     import {fade} from 'svelte/transition'
     import SnackbarPage from './Pages/SnackbarPage.svelte';
+    import TextInput from './components/TextInput.svelte';
     
 
     const pages = ['/', '/buttons', '/snackbars', '/table']
@@ -51,6 +52,8 @@
 </Navbar>
 
 <main>
+    <!-- <TextInput/> -->
+    <div class="gallery-wrapper">
     {#if $location == pages[0]}
         <Hero />    
     {:else if $location == pages[1]}
@@ -58,11 +61,14 @@
     {:else if $location == pages[2]}
         <SnackbarPage button={button}/>
     {/if}
+    </div>
 
     <div class="switch-buttons">
         <Button icon="chevron_left" href={last} on:click={() => button = 'back'}>back</Button>
         <Button icon="chevron_right" flipped={true} href={next} on:click={() => button = 'next'}>next</Button>
     </div>
+
+    
 
     <!-- <Button color="green" on:click={() => {addSnackbar("200", "Created new snackbar!", "green", 50000)}}>Add snackbar</Button>
     <SnackbarGroup />
@@ -116,7 +122,11 @@
 
     main {
         width: 100%;
+    }
+
+    div.gallery-wrapper {
         display: grid;
+        overflow-x: hidden;
     }
 
     div.switch-buttons {
