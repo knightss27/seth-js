@@ -27,7 +27,7 @@
         
     })
     
-    $: if (!validateHTMLColorName(color) || validateHTMLColor(color)) {
+    $: if (!validateHTMLColorName(color) || !validateHTMLColor(color)) {
         color = "green"
         console.warn("<Snackbar> component was created with invalid value for 'color'")
     }
