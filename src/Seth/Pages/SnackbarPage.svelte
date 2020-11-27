@@ -8,6 +8,7 @@
     import { fly } from 'svelte/transition'
     import { quintOut } from 'svelte/easing';
     import { onMount } from 'svelte';
+    import TextInput from '../components/TextInput.svelte';
     export let button: string;
     let onscreen = false;
 
@@ -15,7 +16,10 @@
         onscreen = true;
     })
 
-    let open = true;
+    let status: number = null;
+    let message: string = "";
+    let color: string = "";
+
 </script>
 
 <div class="snackbar-wrapper" out:fly="{{delay: 0, x: (button == 'next') && (onscreen) ? -500 : 500, duration: 300, easing: quintOut }}" in:fly="{{delay: 200, x: (button == 'back') && (!onscreen) ? -500 : 500, duration: 300, easing: quintOut }}">
@@ -34,7 +38,17 @@
                 <Button color="red" on:click={() => {addSnackbar('200', 'error snackbar', 'red', 3000)}}>Add error</Button>
             </div>
             <div class="customizable">
-                <h3>Customization (WIP)</h3>
+                <h3>Customization</h3>
+                    <div style="display: flex">
+                        <div style="display: flex; width: 45%; flex-direction: column; flex-grow: 1">
+                            <TextInput bind:value={status} type="number" icon="bug_report" variant="compact" placeholder="status"/>
+                            <TextInput bind:value={message} icon="insert_comment" variant="compact" placeholder="message" />
+                        </div>
+                        <div style="display: flex; width: 45%; flex-direction: column; flex-grow: 1">
+                            <TextInput bind:value={color} icon="palette" variant="compact" placeholder="color" />
+                            <Button height="35px" on:click={() => {addSnackbar(status, message, color, 3000)}}>Add snackbar</Button>
+                        </div>
+                    </div>
             </div>
         </div>
     </Card>

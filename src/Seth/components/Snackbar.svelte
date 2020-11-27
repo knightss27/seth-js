@@ -10,9 +10,11 @@
 
     import {fly} from 'svelte/transition'
     import { sineInOut } from 'svelte/easing'
-    import { onMount } from 'svelte'
+    import { afterUpdate, onMount } from 'svelte'
+    import { validateHTMLColor, validateHTMLColorName } from "validate-color";
 
     onMount(() => {
+        
         if (grouped) {
             open = true;
             handleClose = () => {open = false;}
@@ -24,6 +26,13 @@
         }
         
     })
+    
+    $: if (!validateHTMLColorName(color) || validateHTMLColor(color)) {
+        color = "green"
+        console.warn("<Snackbar> component was created with invalid value for 'color'")
+    }
+
+    //TODO: fix the above so it only warns once or twice maybe.
 
     // example usage:
     // <Snackbar 
