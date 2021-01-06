@@ -72,7 +72,7 @@
     <!-- <Button color="green" on:click={() => {addSnackbar("200", "Created new snackbar!", "green", 50000)}}>Add snackbar</Button>
     <SnackbarGroup />
     <div style={'width: 90%;'}>
-        <Stepper color="black" steps={3}></Stepper>
+        <Stepper color="black" steps={4} currentStep={2} on:forwards={(e) => {console.log('forwards!', e.detail)}}></Stepper>
     </div>
     
     <br>

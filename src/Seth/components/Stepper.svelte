@@ -2,6 +2,7 @@
     import Button from './Button.svelte'
     import { tweened } from 'svelte/motion'
     import { cubicOut } from 'svelte/easing';
+    import { createEventDispatcher } from 'svelte';
 
     /** button and outline color */
     export let color: string = "black";
@@ -9,33 +10,53 @@
     export let width: string = "100%";
     /** should show checkmarks? */
     export let simple: boolean = true;
-
-    //logic exports
+    /** text of the backwards button */
+    export let forwards: string = "next";
+    /** text of the forwards button */
+    export let backwards: string = "previous";
+    /** number of steps, starts at the 0th step */
     export let steps: number = 4;
-    export let nextStep: () => void = null;
-    export let prevStep: () => void = null;
+    /** callback function for when the forwards button is clicked.
+     *  **PLEASE NOTE**: This will override the default step management function.
+     *  If you do not want a controlled stepper, use `on:forwards`.
+     */
+    export let nextStep: ({e: Event, percent: number}) => void = null;
+    /** callback function for when the forwards button is clicked.
+     *  **PLEASE NOTE**: This will override the default step management function.
+     *  If you do not want a controlled stepper, use `on:backwards`.
+     */
+    export let prevStep: ({e: Event, percent: number}) => void = null;
+    /** allows for controlling/binding the current step, should be less than or equal to the total steps */
     export let currentStep: number = 0;
+    /** returns true when currentStep >= steps */
     export let finished: boolean = false;
+    /** returns true when currentStep > 0 */
     export let started: boolean = false;
-
-
-    //derived
+    /** whether or not to split the bar into fragments, or stay as a single bar */
     export let capped: boolean = true;
+    /** margin in pixels between stepper and your wrapping component */
+    export let margin: number = 4;
+
+    const dispatch = createEventDispatcher();
 
     $: steps > 0 ? started = true : null
 
-    const next = () => {
+    
+
+    const next = (e: Event) => {
         if (currentStep < steps) {
             currentStep += 1;
         } else {
             finished = true;
         }
+        dispatch('forwards', {event: e, percent: Math.round(currentStep/steps * 100)});
     }
 
-    const prev = () => {
-        if (currentStep > 0) {
+    const prev = (e: Event) => {
+        if (currentStep > 0) {  
             currentStep -= 1;
         }
+        dispatch('backwards', e);
     }
 
     let tweenedStepWidth = tweened(0, {
@@ -44,8 +65,6 @@
     });
 
     $: $tweenedStepWidth = currentStep/steps * 100;
-
-    let margin = 4;
 
 </script>
 
@@ -56,7 +75,10 @@
     flex-direction:{capped && !simple ? 'column' : 'row'}; 
     align-items:{capped && !simple ? 'flex-start' : 'center'}"
     >
-    <Button on:click={prevStep != null ? prevStep : prev} color={color}>Previous</Button>
+    <Button on:click={(e) => {prevStep != null ? prevStep({e, percent: Math.round(currentStep/steps * 100)}) : prev(e)}} color={color}>
+        {backwards}
+    </Button>
+    
     {#if !capped}
     <div class="container">
         <div class="stepper-bar" style="--stepperWidth:{$tweenedStepWidth}%;--color:{color};"></div>
@@ -72,22 +94,23 @@
                 <div class="capped-stepper-bar-bg"></div>
                 {#if i < steps - 1}
                 <div class="stepper-cap" style="opacity:{currentStep >= i+1 ? "1" : ".2"};"></div>
-                {:else if i < steps - 1 && i <= currentStep - 2}
+                {/if}
+                <!-- {#if i < steps - 1}
                 <div class="stepper-cap-check">
                     <span class="material-icons">
                         check
                     </span>
                 </div>
-                {/if}
+                {/if} -->
             </div>
         {/each}
     </div>
     {/if}
 
 
-    <Button on:click={nextStep != null ? nextStep : next} color={color}>
+    <Button on:click={(e) => {nextStep != null ? nextStep({e, percent: Math.round(currentStep/steps * 100)}) : next(e)}} color={color}>
         <!-- {currentStep >= steps - 1 ? "finish" : "next"} -->
-        next
+        {forwards}
     </Button>
 
 </main>
@@ -173,18 +196,27 @@
         transform: translateY(-50%);
         transition: ease opacity 0.3s 0.1s, ease height 0.3s, ease width 0.3s;
     }
-    .stepper-cap-check {
-        font-size: 1rem !important;
-        width: 10px;
-        height: 10px;
-        color: var(--color);
+
+
+    /* TODO: Properly implement checkmarks on finished caps. */
+    /* .stepper-cap-check {
+        font-size: 15px !important;
+        width: 16px;
+        height: 16px;
+        color: white;
+        background-color: var(--color);
         opacity: 1;
         border-radius: 25px;
         position: absolute;
         top: 50%;
-        right: calc(-5px);
+        right: calc(-8px);
         transform: translateY(-50%);
         transition: ease opacity 0.3s 0.1s;
     }
+
+    .stepper-cap-check span {
+        font-size: 15px;
+        font-weight: 900;
+    } */
 
 </style>
