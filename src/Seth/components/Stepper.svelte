@@ -14,6 +14,8 @@
     export let forwards: string = "next";
     /** text of the forwards button */
     export let backwards: string = "previous";
+    /** if set, will show different text on the forwards button when on the final step */
+    export let finalText: string = null;
     /** number of steps, starts at the 0th step */
     export let steps: number = 4;
     /** callback function for when the forwards button is clicked.
@@ -34,14 +36,14 @@
     export let started: boolean = false;
     /** whether or not to split the bar into fragments, or stay as a single bar */
     export let capped: boolean = true;
+    /** whether or not to disable respective buttons when you are at the beginning/end */
+    export let disableWhenUnavailable: boolean = false;
     /** margin in pixels between stepper and your wrapping component */
     export let margin: number = 4;
 
     const dispatch = createEventDispatcher();
 
     $: steps > 0 ? started = true : null
-
-    
 
     const next = (e: Event) => {
         if (currentStep < steps) {
@@ -75,7 +77,11 @@
     flex-direction:{capped && !simple ? 'column' : 'row'}; 
     align-items:{capped && !simple ? 'flex-start' : 'center'}"
     >
-    <Button on:click={(e) => {prevStep != null ? prevStep({e, percent: Math.round(currentStep/steps * 100)}) : prev(e)}} color={color}>
+    <Button 
+        on:click={(e) => {prevStep != null ? prevStep({e, percent: Math.round(currentStep/steps * 100)}) : prev(e)}} 
+        color={color}
+        disabled={disableWhenUnavailable && currentStep == 0}
+    >
         {backwards}
     </Button>
     
@@ -95,22 +101,18 @@
                 {#if i < steps - 1}
                 <div class="stepper-cap" style="opacity:{currentStep >= i+1 ? "1" : ".2"};"></div>
                 {/if}
-                <!-- {#if i < steps - 1}
-                <div class="stepper-cap-check">
-                    <span class="material-icons">
-                        check
-                    </span>
-                </div>
-                {/if} -->
             </div>
         {/each}
     </div>
     {/if}
 
 
-    <Button on:click={(e) => {nextStep != null ? nextStep({e, percent: Math.round(currentStep/steps * 100)}) : next(e)}} color={color}>
-        <!-- {currentStep >= steps - 1 ? "finish" : "next"} -->
-        {forwards}
+    <Button 
+        on:click={(e) => {nextStep != null ? nextStep({e, percent: Math.round(currentStep/steps * 100)}) : next(e)}} 
+        color={color}
+        disabled={disableWhenUnavailable && currentStep == steps}
+    >
+        {currentStep >= steps - 1 && finalText !== null ? finalText : forwards}
     </Button>
 
 </main>

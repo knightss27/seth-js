@@ -17,9 +17,9 @@
     import {fade} from 'svelte/transition'
     import SnackbarPage from './Pages/SnackbarPage.svelte';
     import TextInput from './components/TextInput.svelte';
-    
+    import StepperPage from './Pages/StepperPage.svelte';
 
-    const pages = ['/', '/buttons', '/snackbars', '/table']
+    const pages = ['/', '/buttons', '/snackbars', '/stepper']
 
     let options = ['1', '2', '3']
 
@@ -59,6 +59,8 @@
         <ButtonPage button={button} />
     {:else if $location == pages[2]}
         <SnackbarPage button={button}/>
+    {:else if $location == pages[3]}
+        <StepperPage button={button}/>
     {/if}
     </div>
 
@@ -67,6 +69,9 @@
         <Button icon="chevron_right" flipped={true} href={next} on:click={() => button = 'next'}>next</Button>
     </div>
 
+    <div style={'width: 90%;'}>
+        <Stepper color="black" steps={4} currentStep={2} on:forwards={(e) => {console.log('forwards!', e.detail)}}></Stepper>
+    </div>
     
 
     <!-- <Button color="green" on:click={() => {addSnackbar("200", "Created new snackbar!", "green", 50000)}}>Add snackbar</Button>

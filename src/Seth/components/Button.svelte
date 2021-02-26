@@ -2,6 +2,7 @@
 
     export let filled: boolean = false;
     export let color: string = "black";
+    export let disabledColor: string = "#aaa";
     export let icon: string = "";
     export let style: string = "";
     export let disabled: boolean = false;
@@ -20,6 +21,7 @@
     ```tsx
         <Button
             color="color-name|hex"
+            disabledColor="color-name|hex"
             icon="material-icon-name"
             filled={true|false}
             disabled={true|false}
@@ -41,9 +43,10 @@
         - This is optional. To create an icon-only button, self close the button.
 
 -->
+
 {#if href !== null}
     <a href={href}>
-        <button class:filled class:flipped style="--buttonColor:{color};width:{width};height:{height};{style}" disabled={disabled} class:disabled on:click>
+        <button class:filled class:flipped style="--buttonColor:{color};--disabledColor:{disabledColor};width:{width};height:{height};{style}" disabled={disabled} class:disabled on:click>
             {#if icon != ""}
             <span class="material-icons button-icon" class:flipped class:icon-only={!isSlotFilled}>
                 {icon}
@@ -57,7 +60,7 @@
         </button>
     </a>
 {:else}
-    <button class:filled class:flipped style="--buttonColor:{color};width:{width};height:{height};{style}" disabled={disabled} class:disabled on:click>
+    <button class:filled class:flipped style="--buttonColor:{color};--disabledColor:{disabledColor};width:{width};height:{height};{style}" disabled={disabled} class:disabled on:click>
         {#if icon != ""}
         <span class="material-icons button-icon" class:flipped class:icon-only={!isSlotFilled}>
             {icon}
@@ -114,6 +117,15 @@
         color: white;
     }
 
+    button.disabled {
+        color: var(--disabledColor);
+    }
+
+    button.filled.disabled {
+        color: white;
+        background-color: var(--disabledColor);
+    }
+
     .icon {
         margin: 5px 15px 5px 10px !important;
     }
@@ -145,11 +157,10 @@
 
     .disabled:hover {
         background: initial;
-        color: initial;
     }
 
     .disabled.filled:hover {
-        background-color: var(--buttonColor);
+        background-color: var(--disabledColor);
         color: white;
     }
 
