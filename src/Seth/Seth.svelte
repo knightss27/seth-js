@@ -68,10 +68,6 @@
         <Button icon="chevron_left" href={last} on:click={() => button = 'back'}>back</Button>
         <Button icon="chevron_right" flipped={true} href={next} on:click={() => button = 'next'}>next</Button>
     </div>
-
-    <div style={'width: 90%;'}>
-        <Stepper color="black" steps={4} currentStep={2} on:forwards={(e) => {console.log('forwards!', e.detail)}}></Stepper>
-    </div>
     
 
     <!-- <Button color="green" on:click={() => {addSnackbar("200", "Created new snackbar!", "green", 50000)}}>Add snackbar</Button>

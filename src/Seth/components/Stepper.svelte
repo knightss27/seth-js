@@ -7,7 +7,7 @@
     /** button and outline color */
     export let color: string = "black";
     /** component width */
-    export let width: string = "100%";
+    export let width: string = "auto";
     /** should show checkmarks? */
     export let simple: boolean = true;
     /** text of the backwards button */
@@ -39,7 +39,9 @@
     /** whether or not to disable respective buttons when you are at the beginning/end */
     export let disableWhenUnavailable: boolean = false;
     /** margin in pixels between stepper and your wrapping component */
-    export let margin: number = 4;
+    export let margin: number = 0;
+    /** styles passed to the wrapping `main` element */
+    export let style: string = "";
 
     const dispatch = createEventDispatcher();
 
@@ -71,11 +73,11 @@
 </script>
 
 <main 
-    style="
-    --color:{color};
+    style=
+    "--color:{color};
     --containerWidth:calc({width} - {3 * margin}px); 
     flex-direction:{capped && !simple ? 'column' : 'row'}; 
-    align-items:{capped && !simple ? 'flex-start' : 'center'}"
+    align-items:{capped && !simple ? 'flex-start' : 'center'};{style}"
     >
     <Button 
         on:click={(e) => {prevStep != null ? prevStep({e, percent: Math.round(currentStep/steps * 100)}) : prev(e)}} 
