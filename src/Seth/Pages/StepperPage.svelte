@@ -22,6 +22,7 @@
         <Stepper style={"margin: 0.5rem 0px"} capped={false} color="black" steps={4} currentStep={1}></Stepper>
         <Stepper style={"margin: 0.5rem 0px"} forwards="your text" backwards="my text" capped={false} color="green" steps={4} currentStep={3}></Stepper>
         <Stepper style={"margin: 0.5rem 0px"} color="green" steps={6} currentStep={3}></Stepper>
+        <Stepper style={"margin: 0.5rem 0px"} disableWhenUnavailable={true} finalText="did you blink?" forwards="click me!" color="indigo" steps={6} capped={false} currentStep={4}></Stepper>
     </div>
 </div>
 
@@ -36,6 +37,7 @@
 		grid-row: 1/2;
         height: auto;
         color: black;
+        min-height: 354px;
     }
 
     div.header {
@@ -54,6 +56,7 @@
         flex-direction: column;
         width: calc(100% - 14px);
         max-width: 500px;
+        min-height: 344px;
     }
 
 </style>
