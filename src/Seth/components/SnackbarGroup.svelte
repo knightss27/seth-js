@@ -23,10 +23,7 @@
 <div id="SnackBarContainer">
     {#each Object.keys($SnackBars) as key}
     <Snackbar
-        status={$SnackBars[key].status} 
-        message={$SnackBars[key].message} 
-        color={$SnackBars[key].color}
-        timeout={$SnackBars[key].timeout}
+        {...$SnackBars[key]}
         grouped={true}
     />
     {/each}

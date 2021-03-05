@@ -1,7 +1,7 @@
 <script lang="ts">
-    import {fly} from 'svelte/transition'
+    import { fly } from 'svelte/transition'
     import { sineInOut } from 'svelte/easing'
-    import { afterUpdate, onMount, createEventDispatcher } from 'svelte'
+    import { onMount, createEventDispatcher } from 'svelte'
     import { validateHTMLColor, validateHTMLColorName } from "validate-color";
 
     /** should the snackbar be visible */

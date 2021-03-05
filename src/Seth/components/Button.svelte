@@ -1,14 +1,23 @@
 <script lang="ts">
-
+    /** filled variant? */
     export let filled: boolean = false;
+    /** color of the button, can be any CSS valid string */
     export let color: string = "black";
+    /** color of the button's background/text when disabled */
     export let disabledColor: string = "#aaa";
+    /** material icon to render */
     export let icon: string = "";
+    /** styles passed to the button component */
     export let style: string = "";
+    /** disable button? */
     export let disabled: boolean = false;
+    /** flip icon and text arrangement */
     export let flipped: boolean = false;
+    /** width of the button */
     export let width: string = "";
+    /** height of the button */
     export let height: string = "";
+    /** href for button to act as link. this will wrap the button with an <a> */
     export let href: string = null;
 
     $: isSlotFilled = $$slots["default"];
@@ -44,6 +53,7 @@
 
 -->
 
+<!-- TODO: Find a better way to do href differentiation -->
 {#if href !== null}
     <a href={href}>
         <button class:filled class:flipped style="--buttonColor:{color};--disabledColor:{disabledColor};width:{width};height:{height};{style}" disabled={disabled} class:disabled on:click>
