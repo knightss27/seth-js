@@ -1,27 +1,53 @@
 <script lang="ts">
-    export let open: boolean = false;
-    export let status: string = "200";
-    export let message: string = "";
-    export let color: string = "green";
-    export let handleClose: () => any = null;
-    export let timeout: number = 4000;
-    export let grouped: boolean = false;
-    export let style: string = "";
-
     import {fly} from 'svelte/transition'
     import { sineInOut } from 'svelte/easing'
-    import { afterUpdate, onMount } from 'svelte'
+    import { afterUpdate, onMount, createEventDispatcher } from 'svelte'
     import { validateHTMLColor, validateHTMLColorName } from "validate-color";
+
+    /** should the snackbar be visible */
+    export let open: boolean = false;
+    /** status code for the snackbar */
+    export let status: string | number = "200";
+    /** message to be displayed */
+    export let message: string = "";
+    // TODO: colors should really be chosen in a better way than they currently are.
+    /** snackbar color */
+    export let color: string = "green";
+    /** callback function for when the close button is clicked.
+     *  **PLEASE NOTE**: This will override the default close management function.
+     *  If you do not want a controlled snackbar, use `on:close`.
+     */
+    export let handleClose: (e: Event) => any = null;
+    /** number of ms before snackbar is removed */
+    export let timeout: number = 4000;
+    /** is this snackbar part of a snackbar group? designed for internal use */
+    export let grouped: boolean = false;
+    /** styles passed on to the snackbar */
+    export let style: string = "";
+
+    const dispatch = createEventDispatcher();
+
+    const internalHandleClose = (e: Event) => {
+        // Dispatch close event
+        dispatch('close', {event: e, open});
+        
+        // Call handleClose if it has been set
+        if (handleClose !== null) {
+            handleClose(e);
+            return;
+        }
+
+        open = false;
+    }
 
     onMount(() => {
         
         if (grouped) {
             open = true;
-            handleClose = () => {open = false;}
         }
 
         if (timeout !== null) {
-            let autoClose = setTimeout(handleClose, timeout);
+            const autoClose = setTimeout(internalHandleClose, timeout);
             return () => {clearTimeout(autoClose);}
         }
         
@@ -33,15 +59,6 @@
     }
 
     //TODO: fix the above so it only warns once or twice maybe.
-
-    // example usage:
-    // <Snackbar 
-    //      color="green" 
-    //      status="200" 
-    //      message="Successfully added snackbar." 
-    //      handleClose={() => {open = false}}      <---- handleClose must always evaluate the var to false.
-    // />
-
 </script>
 
 {#if open}
@@ -49,15 +66,14 @@
     transition:fly="{{delay: 50, duration: 400, y:100, easing: sineInOut }}" style="--mainColor:{color};"
     class:grouped={grouped} class:ungrouped={!grouped}
     >
-    <div class="wrapper" style={style}>
-        <div class="status">{status}</div>
-        <div class="message">{message.toLowerCase()}</div>
-        <span class="material-icons" on:click={handleClose} style="--mainColor:{color};">
-            close
-        </span>
-    </div>
-</main>
-
+        <div class="wrapper" style={style}>
+            <div class="status">{status}</div>
+            <div class="message">{message.toLowerCase()}</div>
+            <span class="material-icons" on:click={handleClose} style="--mainColor:{color};">
+                close
+            </span>
+        </div>
+    </main>
 {/if}
 
 <style>
