@@ -19,7 +19,7 @@
 -->
 
 <main style="--groupWidth:{width}">
-    <wrapper style="width: 100%" class="sethjs-ButtonGroup">
+    <wrapper style="width: 100%">
         <slot></slot>
     </wrapper>
 </main>
@@ -31,7 +31,7 @@
         width: var(--groupWidth);
     }
 
-    .sethjs-ButtonGroup :global(div) {
+    wrapper :global(div) {
         flex: auto;
         color: black;
         background: transparent;
@@ -48,19 +48,19 @@
         text-transform: lowercase;
     }
 
-    .sethjs-ButtonGroup :global(div:hover) {
+    wrapper :global(div:hover) {
         background: black;
         color: white;
         flex-grow: 2;
     }
 
-    .sethjs-ButtonGroup :global(div:active) {
+    wrapper :global(div:active) {
         transform: translate(0px, 2px);
         box-shadow: none;
     }
 
 
-    .sethjs-ButtonGroup :global(div + div) {
+    wrapper :global(div + div) {
         border-left: 2px solid black;
         margin-left: -2px;
     }
