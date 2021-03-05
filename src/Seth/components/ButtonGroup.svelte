@@ -1,6 +1,6 @@
 <script lang="ts">
-    export let width:string = "100%"
-    export let clientWidth:number;
+    /** width of the button group */
+    export let width: string = "100%";
 </script>
 
 <!-- 
@@ -14,21 +14,11 @@
             <div>Button 3</div>
         </ButtonGroup>
     ```
-
-    **Options TO BE IMPLEMENTED:**
-    - All options have defaults, so all are optional.
-        - *color* (string: "black"): can be any hex code or color name.
-        - *icon* (string): the name of a material icon
-        - *filled* (boolean: false) whether the button should be the filled variant.
-        - *disabled* (boolean: false) disables the button
-        - *style* (string): styling applied to main button element.
-
-    - Button text can be put between the button tags.
-        - This is optional. To create an icon-only button, self close the button.
+    TODO: Finish this documentation
 
 -->
 
-<main style="--groupWidth:{width}" bind:clientWidth={clientWidth}>
+<main style="--groupWidth:{width}">
     <wrapper style="width: 100%" class="sethjs-ButtonGroup">
         <slot></slot>
     </wrapper>
@@ -41,7 +31,7 @@
         width: var(--groupWidth);
     }
 
-    :global(.sethjs-ButtonGroup div) {
+    .sethjs-ButtonGroup :global(div) {
         flex: auto;
         color: black;
         background: transparent;
@@ -58,19 +48,19 @@
         text-transform: lowercase;
     }
 
-    :global(.sethjs-ButtonGroup div:hover) {
+    .sethjs-ButtonGroup :global(div:hover) {
         background: black;
         color: white;
         flex-grow: 2;
     }
 
-    :global(.sethjs-ButtonGroup div:active) {
+    .sethjs-ButtonGroup :global(div:active) {
         transform: translate(0px, 2px);
         box-shadow: none;
     }
 
 
-    :global(.sethjs-ButtonGroup div + div) {
+    .sethjs-ButtonGroup :global(div + div) {
         border-left: 2px solid black;
         margin-left: -2px;
     }
